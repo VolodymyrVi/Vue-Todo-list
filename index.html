@@ -19,8 +19,8 @@
             <div class="container">
                 <div class="logo">ToDo List</div>
                 <div class="form">
-                    <input type="text">
-                    <button class="btn">Add a ne task</button>
+                    <input type="text" v-bind:value="valueInput" v-on:input="handlyInput" v-on:keypress.enter="addTask">
+                    <button class="btn" v-on:click="addTask">Add a new task</button>
                 </div>
             </div>
         </div>
@@ -30,9 +30,9 @@
                 <span class="mask-num">10</span>
             </h2>
             <ul class="mask-list">
-                <li>
-                    <input type="checkbox">
-                    <span>New video</span>
+                <li v-for="(mask, index) in needDoList" :key="mask.id">
+                    <input type="checkbox" v-on:change="doCheck(index, 'need')">
+                    <span>{{ mask.title }}</span>
                     <button class="btn-remove">Remove</button>
                 </li>
             </ul>
@@ -42,9 +42,9 @@
                 <span class="mask-num">10</span>
             </h2>
             <ul class="mask-list complete-list">
-                <li>
-                    <input type="checkbox" checked>
-                    <span>Add code</span>
+                <li v-for="(mask, index) in completeList" :key="mask.id">
+                    <input type="checkbox" v-on:change="doCheck(index, 'complete')" checked>
+                    <span>{{ mask.title }}</span>
                     <button class="btn-remove">Remove</button>
                 </li>
             </ul>
